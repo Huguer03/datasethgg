@@ -1,0 +1,22 @@
+Package: datasethgg
+Type: Package
+Title: Manejo de datos y datasets con clases S4 y funciones
+Version: 1.0.0
+Author: Hugo Gonzalez Gonzalez
+Maintainer: Hugo <hgonzalez031@ikasle.ehu.eus>
+Description: Paquete que define clases S4 para analisis de datos mediante datasets,
+    y funciones para crear, leer, escribir y convertir datasets.
+License: GPL (>= 2)
+Encoding: UTF-8
+Collate:
+    dataset_atributos.R
+    dataset_utils.R
+    dataset_funciones.R
+    dataset.R
+    discretizacion.R
+    estadistica.R
+    graficar.R
+Suggests:
+    ggplot2,
+    reshape2
+Config/roxygen2/version: 8.1.1
