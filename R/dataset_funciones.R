@@ -40,16 +40,31 @@ aplica.num <- function(ds, f){
 #' @details Se delega en \code{\link{aplica.num}}. El atributo
 #'   \code{"cut.points"} generado por las funciones de discretización se elimina
 #'   antes de guardar los valores.
-#' @seealso \code{\link{discretizacionEW}}, \code{\link{discretizacionEF}}.
+#' @seealso \code{\link{discretizeEW}}, \code{\link{discretizeEF}}.
 #' @export
 #' 
 discretizar.dataset <- function(ds, num.bins, metodo = "EF"){
-  f <- if (metodo == "EW") discretizacionEW else discretizacionEF
+  f <- if (metodo == "EW") discretizeEW else discretizeEF
   aplica.num(ds, function(a){
     v <- f(a@valores, num.bins)
     attr(v, "cut.points") <- NULL       # quitamos el atributo extra antes de guardarlo
     new("atributo.cat", nombre = a@nombre, valores = v)
   })
+}
+
+#' Normalizar los atributos numéricos de un dataset
+#'
+#' Normaliza al rango \eqn{[0, 1]} todos los atributos numéricos de un dataset.
+#'
+#' @param ds Objeto de clase \code{\linkS4class{dataset}}.
+#' @return El dataset con los atributos numéricos normalizados.
+#' @details Se delega en \code{\link{aplica.num}} usando la función
+#'   \code{\link{normalize}}.
+#' @seealso \code{\link{normalize}}.
+#' @export
+#' 
+normalizar.dataset <- function(ds){
+  aplica.num(ds, function(a) new("atributo.num", nombre = a@nombre, valores = normalize(a@valores)))
 }
 
 #' Estandarizar los atributos numéricos de un dataset
@@ -62,11 +77,7 @@ discretizar.dataset <- function(ds, num.bins, metodo = "EF"){
 #'   \code{\link{standardize}}.
 #' @seealso \code{\link{standardize}}.
 #' @export
-#' 
-normalizar.dataset <- function(ds){
-  aplica.num(ds, function(a) new("atributo.num", nombre = a@nombre, valores = normalize(a@valores)))
-}
-
+#'
 estandarizar.dataset <- function(ds){
   aplica.num(ds, function(a) new("atributo.num", nombre = a@nombre, valores = standardize(a@valores)))
 }
@@ -184,7 +195,7 @@ matriz.cor <- function(ds){
 #' @details Se usa \code{\link{mutual.info}} para calcular cada celda. La
 #'   diagonal contiene la información mutua de cada variable consigo misma
 #'   (su entropía).
-#' @seealso \code{\link{mutual.info}}, \code{\link{discretizacionEF}},
+#' @seealso \code{\link{mutual.info}}, \code{\link{discretizeEF}},
 #'   \code{\link{matriz.cor}}.
 #' @export
 #' 
@@ -193,7 +204,7 @@ matriz.mi <- function(ds, num.bins = NULL){
   for (n in names(ds@atributos)){
     a <- ds@atributos[[n]]
     if (!es.num(a)) facs[[n]] <- a@valores
-    else if (!is.null(num.bins)) facs[[n]] <- discretizacionEF(a@valores, num.bins)
+    else if (!is.null(num.bins)) facs[[n]] <- discretizeEF(a@valores, num.bins)
   }
   k <- length(facs)
   m <- matrix(0, k, k, dimnames = list(names(facs), names(facs)))

@@ -23,8 +23,17 @@
 graf.roc <- function(df, name = "ROC curve", ref = TRUE){
   curva <- roc(df)
   df.plt <- data.frame(FPR = curva$FPR, TPR = curva$TPR, ROC = name)
-  g <- ggplot(df.plt, aes(x = FPR, y = TPR, col = ROC)) + geom_line()
-  if (ref) g <- g + geom_abline(slope = 1, intercept = 0, linetype = "dashed")
+
+  if (ref) {
+    g <- ggplot(df.plt, aes(x = FPR, y = TPR, col = ROC)) +
+         geom_line() +
+         coord_cartesian(ylim = c(0,1)) +
+         geom_abline(slope = 1, intercept = 0, linetype = "dashed")
+  } else{
+    g <- ggplot(df.plt, aes(x = FPR, y = TPR, col = ROC)) +
+         geom_line() +
+         coord_cartesian(ylim = c(0,1))
+    }
   return(g)
 }
 

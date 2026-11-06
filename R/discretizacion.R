@@ -13,12 +13,12 @@
 #'   con \code{include.lowest = TRUE}.
 #' @examples
 #' x <- rnorm(100)
-#' dx <- discretizacionEW(x, 5)
+#' dx <- discretizeEW(x, 5)
 #' table(dx)
 #' attr(dx, "cut.points")
 #' @export
 #' 
-discretizacionEW <- function(x, num.bins){
+discretizeEW <- function(x, num.bins){
   val.min <- min(x)
   val.max <- max(x)
   delta <- (val.max - val.min) / num.bins
@@ -42,12 +42,12 @@ discretizacionEW <- function(x, num.bins){
 #'   \code{include.lowest = TRUE}.
 #' @examples
 #' x <- rnorm(100)
-#' dx <- discretizacionEF(x, 5)
+#' dx <- discretizeEF(x, 5)
 #' table(dx)
 #' attr(dx, "cut.points")
 #' @export
 #' 
-discretizacionEF <- function(x, num.bins){
+discretizeEF <- function(x, num.bins){
   intervals <- quantile(x, probs = 0:num.bins / num.bins)
   discrete.x <- cut(x, breaks = intervals, include.lowest = TRUE)
   attr(discrete.x, "cut.points") <- intervals[2:num.bins]
@@ -68,11 +68,11 @@ discretizacionEF <- function(x, num.bins){
 #'   \code{include.lowest = TRUE}.
 #' @examples
 #' x <- rnorm(100)
-#' dx <- discretizacion(x, c(-1, 0, 1))
+#' dx <- discretize(x, c(-1, 0, 1))
 #' table(dx)
 #' @export
 #' 
-discretizacion <- function(x, cut.points){
+discretize <- function(x, cut.points){
   intervalos <- c(-Inf, sort(cut.points), Inf)
   cut(x, breaks = intervalos, include.lowest = TRUE)
 }

@@ -1,11 +1,11 @@
 Package: datasethgg
 Type: Package
 Title: Manejo de datos y datasets con clases S4 y funciones
-Version: 1.0.0
+Version: 1.0.5
 Author: Hugo Gonzalez Gonzalez
 Maintainer: Hugo <hgonzalez031@ikasle.ehu.eus>
-Description: Paquete que define clases S4 para analisis de datos mediante datasets,
-    y funciones para crear, leer, escribir y convertir datasets.
+Description: Manejo y preprocesado de datasets: discretizacion, escalado, 
+             metricas, filtrado, correlacion, informacion mutua y graficos
 License: GPL (>= 2)
 Encoding: UTF-8
 Collate:

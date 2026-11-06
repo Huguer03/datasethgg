@@ -2,7 +2,7 @@
 % Please edit documentation in R/dataset_funciones.R
 \name{normalizar.dataset}
 \alias{normalizar.dataset}
-\title{Estandarizar los atributos numéricos de un dataset}
+\title{Normalizar los atributos numéricos de un dataset}
 \usage{
 normalizar.dataset(ds)
 }
@@ -10,15 +10,15 @@ normalizar.dataset(ds)
 \item{ds}{Objeto de clase \code{\linkS4class{dataset}}.}
 }
 \value{
-El dataset con los atributos numéricos estandarizados.
+El dataset con los atributos numéricos normalizados.
 }
 \description{
-Estandariza (puntuaciones Z) todos los atributos numéricos de un dataset.
+Normaliza al rango \eqn{[0, 1]} todos los atributos numéricos de un dataset.
 }
 \details{
 Se delega en \code{\link{aplica.num}} usando la función
-  \code{\link{standardize}}.
+  \code{\link{normalize}}.
 }
 \seealso{
-\code{\link{standardize}}.
+\code{\link{normalize}}.
 }
